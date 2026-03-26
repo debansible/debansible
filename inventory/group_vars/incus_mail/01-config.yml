@@ -1,0 +1,6 @@
+---
+top_mail: true
+
+runner:
+  ipv4: "{{ container_ipv4_root }}.{{ param_ip4_mail }}"
+  ipv6: "{{ container_ipv6_root }}:{{ param_ip4_mail }}"

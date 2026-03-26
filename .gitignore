@@ -1,0 +1,27 @@
+# group_vars
+# ==========
+/inventory/group_vars/*/*
+
+# reserved group_vars : project's config start with 0
+!inventory/group_vars/all/0*
+!inventory/group_vars/baremetal/0*
+!inventory/group_vars/vps/0*
+!inventory/group_vars/container/0*
+!inventory/group_vars/incus_dns/0*
+!inventory/group_vars/incus_dokuwiki/0*
+!inventory/group_vars/incus_mail/0*
+!inventory/group_vars/incus_proxy/0*
+!inventory/group_vars/incus_sql/0*
+!inventory/group_vars/incus_test/0*
+
+
+/inventory/host_vars/*
+!inventory/host_vars/.gitignore
+
+/inventory/hosts.d/*
+!inventory/hosts.d/.gitignore
+
+.vault_pass
+
+*.log
+*.retry

@@ -1,0 +1,25 @@
+infra:
+  domain: "{{ param_domain }}"
+  ipv4_cidr: "{{ param_ipv4_cidr }}"
+  ipv6_cidr: "{{ param_ipv6_cidr }}"
+  interface: "{{ param_interface | default('eth0') }}"
+  gateway:
+    hostname: "gateway.{{ param_domain }}"
+    ipv4: "{{ param_ipv4_root }}.{{ param_ip4_gateway }}"
+    ipv6: "{{ param_ipv6_root }}:{{ param_ip4_gateway }}"
+  dns:
+    hostname: "dns.{{ param_domain }}"
+    ipv4: "{{ param_ipv4_root }}.{{ param_ip4_dns }}"
+    ipv6: "{{ param_ipv6_root }}:{{ param_ip4_dns }}"
+  mail: 
+    hostname: "mail.{{ param_domain }}"
+    ipv4: "{{ param_ipv4_root }}.{{ param_ip4_mail }}"
+    ipv6: "{{ param_ipv6_root }}:{{ param_ip4_mail }}"
+  sql:    
+    hostname: "sql.{{ param_domain }}"
+    ipv4: "{{ param_ipv4_root }}.{{ param_ip4_sql }}"
+    ipv6: "{{ param_ipv6_root }}:{{ param_ip4_sql }}"
+  proxy:    
+    hostname: "proxy.{{ param_domain }}"
+    ipv4: "{{ param_ipv4_root }}.{{ param_ip4_proxy }}"
+    ipv6: "{{ param_ipv6_root }}:{{ param_ip4_proxy }}"

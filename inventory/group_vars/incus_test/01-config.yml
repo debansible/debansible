@@ -1,0 +1,7 @@
+---
+top_dhcp: true
+
+runner:
+  hostname: "test{{ ip3 | default('99') }}"
+  ipv4: "none"
+  ipv6: "{{ container_ipv6_root }}:99"

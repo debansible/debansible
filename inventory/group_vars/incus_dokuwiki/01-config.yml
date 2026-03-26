@@ -1,0 +1,6 @@
+---
+top_dokuwiki: true
+
+runner:
+  ipv4: "{{ container_ipv4_root }}.{{ param_ip4_dokuwiki }}"
+  ipv6: "{{ container_ipv6_root }}:{{ param_ip4_dokuwiki }}"

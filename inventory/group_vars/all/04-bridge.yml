@@ -1,0 +1,8 @@
+bridge:
+  name: "br0"
+  ipv4:
+    address: "{{ infra.gateway.ipv4 }}"
+    cidr: "{{ infra.ipv4_cidr }}"
+  ipv6: 
+    address: "{{ infra.gateway.ipv6 }}"
+    cidr: "{{ infra.ipv6_cidr }}"

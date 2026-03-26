@@ -1,0 +1,16 @@
+---
+runner:
+  hostname: "{{ my_bastion.hostname }}"
+  domain: "{{ my_bastion.domain}}"
+  fullname: "{{ runner.hostname }}.{{ runner.domain}}"
+  interface: "venet0"
+  ipv4: "{{ my_bastion.ipv4 }}"
+  ipv4_cidr: "32"
+  ipv6: "{{ my_bastion.ipv6 }}"
+  ipv6_cidr: "128"
+
+host_type: "bastion"
+top_dhcp: false
+top_bastion: true
+
+ansible_host: "{{ runner.hostname }}"

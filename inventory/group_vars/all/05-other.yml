@@ -1,0 +1,14 @@
+---
+rescue_name: "rescue-12"
+
+top_dhcp: true
+top_baremetal: false
+top_rescue: false
+top_server: false
+top_bastion: false
+top_containers: false
+top_dns: false
+top_mail: false
+top_dokuwiki: false
+top_proxy: false
+top_sql: false

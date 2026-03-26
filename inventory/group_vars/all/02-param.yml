@@ -1,0 +1,40 @@
+# domain interne
+param_domain: "incus"
+
+# network IPv4 : 10.0.0.0/15 (10.1.255.255)
+param_ip1: "10"
+param_ip2: "0"
+param_ip3: "0"
+param_ipv4_cidr: "15"
+
+# network IPv6 : fd42::0/64
+param_ipA: "fd42"
+param_ipv6_cidr: "64"
+
+# gateway : 10.0.0.1 / fd42::10:0:0:1
+param_ip4_gateway: "1"
+
+# dns : 10.0.0.53 / fd42::10:0:0:53
+param_ip4_dns: "53"
+
+# smtp/mail : 10.0.0.21  / fd42::10:0:0:21
+param_ip4_mail: "21"
+
+# database : 10.0.0.37 / fd42::10:0:0:37
+param_ip4_sql: "37"
+
+# proxy : 10.0.0.10 / fd42::10:0:0:10
+param_ip4_proxy: "10"
+
+# proxy : 10.0.0.80 / fd42::10:0:0:80
+param_ip4_dokuwiki: "80"
+
+# nameserver
+param_nameserver_1: "213.186.33.99"       # OVH
+param_nameserver_2: "2001:41d0:3:163::1"  # OVH
+param_nameserver_3: "1.1.1.1"
+param_nameserver_4: "8.8.8.8"
+
+# helpers
+param_ipv4_root: "{{ param_ip1 }}.{{ param_ip2 }}.{{ param_ip3 }}"
+param_ipv6_root: "{{ param_ipA }}::{{ param_ip1 }}:{{ param_ip2 }}:{{ param_ip3 }}"

@@ -1,0 +1,31 @@
+---
+# --- DONNÉES IRL (CONFIDENTIEL) ---
+my_server:
+  hostname: "myhost"
+  domain: "exemple.com"
+  interface: "eth0"
+  ipv4: "1.2.3.4" # ipv4 of my host
+  cidr_ipv4: "32"
+  ipv6: "1:2:3:4::5" # ipv6 of my host
+  cidr_ipv6: "128"
+
+my_bastion:
+  hostname: "mybastion"
+  domain: "{{ myserver.domaine }}"
+  ipv4: "1.2.3.4" # ipv4 of my bastion host
+  ipv6: "1:2:3:4::5" # ipv4 of bastion myhost
+
+my_gmail:
+  email: "john.do@gmail.com"
+  password: "password"
+
+my_user:
+  name: "jdo"
+  password: "$6$..."
+
+ssh_user: "jdo"
+
+ssh_allow_password: "no" # or yes
+ssh_allowed_users:
+  - "{{ my_user.name }}"
+  - "debansible"

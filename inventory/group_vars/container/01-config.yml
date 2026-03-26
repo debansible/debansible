@@ -1,0 +1,19 @@
+---
+runner:
+  hostname: "{{ hostname }}"
+  domain: "{{ infra.domain}}"
+  fullname: "{{ runner.hostname }}.{{ runner.domain}}"
+  interface: "param_interface | default('eth0')"
+  ipv4: "{{ container_ipv4 }}"
+  ipv4_cidr: "{{ infra.ipv4_cidr }}"
+  ipv6: "{{ container_ipv6 }}"
+  ipv6_cidr: "{{ infra.ipv6_cidr }}"
+
+top_dhcp: false
+host_type: "container"
+
+# Helpers
+container_ipv4_root: "{{ param_ip1 }}.{{ param_ip2 }}.{{ ip3 | default(param_ip3) }}"
+container_ipv6_root: "{{ param_ipA }}::{{ param_ip1 }}:{{ param_ip2 }}:{{ ip3  | default(param_ip3) }}"
+
+ansible_host: "{{ runner.fullname }}"

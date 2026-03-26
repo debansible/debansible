@@ -1,0 +1,15 @@
+---
+runner:
+  hostname: "{{ my_server.hostname }}"
+  domain: "{{ my_server.domain}}"
+  fullname: "{{ runner.hostname }}.{{ runner.domain}}"
+  interface: "my_server.interface | default('eth0')"
+  ipv4: "{{ my_server.ipv4 }}"
+  ipv4_cidr: "{{ my_server.ipv4_cidr | default('32') }}"
+  ipv6: "{{ my_server.ipv6 }}"
+  ipv6_cidr: "{{ my_server.ipv6_cidr | default('128') }}"
+
+host_type: "baremetal"
+top_dhcp: false
+
+ansible_host: "{{ runner.fullname }}"
