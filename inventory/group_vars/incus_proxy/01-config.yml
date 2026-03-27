@@ -1,6 +1,6 @@
 ---
 top_proxy: true
 
-runner:
-  ipv4: "{{ container_ipv4_root }}.{{ param_ip4_proxy }}"
-  ipv6: "{{ container_ipv6_root }}:{{ param_ip4_proxy }}"
+container_hostname: "proxy{{ ip3 | default('') }}"
+container_ipv4: "{{ container_ipv4_root }}.{{ param_ip4_proxy }}"
+container_ipv6: "{{ container_ipv6_root }}:{{ param_ip4_proxy }}"

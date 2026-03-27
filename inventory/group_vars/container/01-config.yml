@@ -1,15 +1,16 @@
 ---
 runner:
-  hostname: "{{ hostname }}"
-  domain: "{{ infra.domain}}"
+  hostname: "{{ container_hostname }}"
+  domain: "{{ infra.domain }}"
   fullname: "{{ runner.hostname }}.{{ runner.domain}}"
-  interface: "param_interface | default('eth0')"
+  interface: "{{ param_interface | default('eth0') }}"
   ipv4: "{{ container_ipv4 }}"
   ipv4_cidr: "{{ infra.ipv4_cidr }}"
   ipv6: "{{ container_ipv6 }}"
   ipv6_cidr: "{{ infra.ipv6_cidr }}"
 
 top_dhcp: false
+top_container: true
 host_type: "container"
 
 # Helpers

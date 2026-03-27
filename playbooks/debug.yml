@@ -1,0 +1,24 @@
+---
+- name: Debug setup
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Loop on hosts
+      ansible.builtin.include_role:
+        name: debansible.debug.view_all_hosts
+      loop:
+        - server
+        - rescue
+        - bastion
+        - dns
+        - dokuwiki
+        - mail
+        - proxy
+        - sql
+        - test
+      loop_control:
+        label: "{{ item }}"
+    - name: Loop on hosts
+      ansible.builtin.include_role:
+        name: debansible.debug.view_common_vars

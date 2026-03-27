@@ -1,14 +1,22 @@
 ---
+# For security when destructive
+# see /etc/hostname when rescue mode
 rescue_name: "rescue-12"
 
+# For network configuration
 top_dhcp: true
+
+# helper for host type
 top_baremetal: false
 top_rescue: false
 top_server: false
-top_bastion: false
-top_containers: false
-top_dns: false
-top_mail: false
-top_dokuwiki: false
-top_proxy: false
-top_sql: false
+top_vps: false
+top_container: false
+
+# helper for roles (default value)
+# to be set true in group_vars or host_vars
+top_dns: false      # true for incus_dns
+top_mail: false     # true for incus_mail
+top_dokuwiki: false # true for incus_dokuwiki
+top_proxy: false    # true for incus_proxy
+top_sql: false      # true for incus_sql

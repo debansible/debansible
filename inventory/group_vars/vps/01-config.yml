@@ -11,6 +11,6 @@ runner:
 
 host_type: "bastion"
 top_dhcp: false
-top_bastion: true
+top_vps: true
 
 ansible_host: "{{ runner.hostname }}"

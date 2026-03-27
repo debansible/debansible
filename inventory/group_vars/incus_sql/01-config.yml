@@ -1,6 +1,6 @@
 ---
 top_sql: true
 
-runner:
-  ipv4: "{{ container_ipv4_root }}.{{ param_ip4_sql }}"
-  ipv6: "{{ container_ipv6_root }}:{{ param_ip4_sql }}"
+container_hostname: "sql{{ ip3 | default('') }}"
+container_ipv4: "{{ container_ipv4_root }}.{{ param_ip4_sql }}"
+container_ipv6: "{{ container_ipv6_root }}:{{ param_ip4_sql }}"

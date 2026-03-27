@@ -1,0 +1,34 @@
+---
+- name: "Common setup: bridge"
+  vars:
+    bridge: "{{ hostvars['server'].bridge }}"
+    infra: "{{ hostvars['server'].infra }}"
+  ansible.builtin.pause:
+    prompt: |
+      ===========================================
+      bridge:
+        name: {{ bridge.name }}
+        ipv4: {{ bridge.ipv4.address }}/{{ bridge.ipv4.cidr }}
+        ipv6: {{ bridge.ipv6.address }}/{{ bridge.ipv6.cidr }}
+      infra:
+        containers:
+          domain: {{ infra.domain }}
+          interface: {{ infra.domain }}
+          ipv4_cidr: {{ infra.ipv4_cidr }}
+          ipv6_cidr: {{ infra.ipv6_cidr }}
+        {{ infra.gateway.hostname }}:
+          ipv4: {{ infra.gateway.ipv4 }}
+          ipv6: {{ infra.gateway.ipv6 }}
+        {{ infra.dns.hostname }}:
+          ipv4: {{ infra.dns.ipv4 }}
+          ipv6: {{ infra.dns.ipv6 }}
+        {{ infra.mail.hostname }}:
+          ipv4: {{ infra.mail.ipv4 }}
+          ipv6: {{ infra.mail.ipv6 }}
+        {{ infra.sql.hostname }}:
+          ipv4: {{ infra.sql.ipv4 }}
+          ipv6: {{ infra.sql.ipv6 }}
+        {{ infra.proxy.hostname }}:
+          ipv4: {{ infra.proxy.ipv4 }}
+          ipv6: {{ infra.proxy.ipv6 }}
+      ===========================================

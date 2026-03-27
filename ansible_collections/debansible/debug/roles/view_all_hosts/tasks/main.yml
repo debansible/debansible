@@ -1,0 +1,24 @@
+---
+- name: "Host's setup: {{ hostname }}"
+  block:
+    - name: Show host's informations
+      vars:
+        hostname: "{{ item }}"
+        ansible_host: "{{ hostvars[item].ansible_host | default('?') }}"
+        ansible_user: "{{ hostvars[item].ansible_user | default('?') }}"
+        host_groups: "{{ hostvars[item].group_names | default(['?']) }}"
+        runner: "{{ hostvars[item].runner }}"
+      ansible.builtin.pause:
+        prompt: |
+          ===========================================
+          Groupes: {{ hostname }}/{{ host_groups | join(', ') }}
+          -------------------------------------------
+          Connection: {{ ansible_host }}
+          Runner:
+            type: {{ hostvars[item].host_type }}
+            fullname: {{ runner.fullname }} ({{ ansible_host }})
+            interface: {{ runner.interface }}
+            DHCP: {{ hostvars[item].top_dhcp }}
+            ipv4: {{ runner.ipv4 }}/{{ runner.ipv4_cidr }}
+            ipv6: {{ runner.ipv6 }}/{{ runner.ipv6_cidr }}
+          ===========================================

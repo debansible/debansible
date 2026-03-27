@@ -1,6 +1,8 @@
 # domain interne
 param_domain: "incus"
 
+param_interface: "eth0"
+
 # network IPv4 : 10.0.0.0/15 (10.1.255.255)
 param_ip1: "10"
 param_ip2: "0"
