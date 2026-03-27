@@ -5,6 +5,9 @@
 # reserved group_vars : project's config start with 0
 !inventory/group_vars/all/0*
 !inventory/group_vars/baremetal/0*
+!inventory/group_vars/server_host/0*
+!inventory/group_vars/server_rescue/0*
+!inventory/group_vars/server_chroot/0*
 !inventory/group_vars/vps/0*
 !inventory/group_vars/container/0*
 !inventory/group_vars/incus_dns/0*

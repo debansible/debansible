@@ -1,0 +1,3 @@
+---
+top_rescue: true
+ansible_host: "rescue"

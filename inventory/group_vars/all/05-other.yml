@@ -8,10 +8,13 @@ top_dhcp: true
 
 # helper for host type
 top_baremetal: false
-top_rescue: false
-top_server: false
 top_vps: false
 top_container: false
+
+# helper for mode (default value)
+top_rescue: false
+top_server: false
+top_chroot: false
 
 # helper for roles (default value)
 # to be set true in group_vars or host_vars

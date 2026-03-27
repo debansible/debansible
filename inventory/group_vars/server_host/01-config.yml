@@ -1,0 +1,3 @@
+---
+top_server: true
+ansible_host: "server"

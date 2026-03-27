@@ -1,0 +1,3 @@
+---
+top_chroot: true
+ansible_host: "chroot"
