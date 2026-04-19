@@ -24,6 +24,7 @@
 /inventory/hosts.d/*
 !inventory/hosts.d/.gitignore
 
+.ansible
 .vault_pass
 
 *.log
