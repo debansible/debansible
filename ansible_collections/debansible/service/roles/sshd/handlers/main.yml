@@ -1,0 +1,23 @@
+---
+
+- name: Validate_sshd_config
+  ansible.builtin.command:
+    cmd: /usr/sbin/sshd -t -f /etc/ssh/sshd_config
+  register: sshd_config_test
+  changed_when: false
+  listen: "validate sshd config"
+  failed_when:
+    - sshd_config_test.rc != 0
+
+- name: Restart_sshd
+  ansible.builtin.systemd:
+    name: sshd
+    state: restarted
+    daemon_reload: true
+  listen: "restart sshd"
+
+- name: Reload_sshd
+  ansible.builtin.systemd:
+    name: sshd
+    state: reloaded
+  listen: "reload sshd"

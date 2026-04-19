@@ -1,0 +1,43 @@
+# {{ ansible_managed }}
+# Default settings
+
+# File paths
+PidFile {{ sshd_pid_file }}
+ModuliFile {{ sshd_moduli_file }}
+XAuthLocation {{ sshd_xauth_location }}
+AuthorizedKeysFile {{ sshd_authorized_keys_file | join(' ') }}
+HostKeyAgent {{ sshd_host_key_agent }}
+SshdSessionPath {{ sshd_sshd_session_path }}
+SshdAuthPath {{ sshd_sshd_auth_path }}
+
+# Host keys
+{% for key in sshd_host_keys %}
+HostKey {{ key }}
+{% endfor %}
+
+# Miscellaneous defaults
+FingerprintHash {{ sshd_fingerprint_hash }}
+ExposeAuthInfo {{ sshd_expose_auth_info }}
+RefuseConnection {{ sshd_refuse_connection }}
+Banner {{ sshd_banner }}
+ForceCommand {{ sshd_force_command }}
+ChrootDirectory {{ sshd_chroot_directory }}
+TrustedUserCAKeys {{ sshd_trusted_user_ca_keys }}
+RevokedKeys {{ sshd_revoked_keys }}
+SecurityKeyProvider {{ sshd_security_key_provider }}
+AuthorizedPrincipalsFile {{ sshd_authorized_principals_file }}
+VersionAddendum {{ sshd_version_addendum }}
+AuthorizedKeysCommand {{ sshd_authorized_keys_command }}
+AuthorizedKeysCommandUser {{ sshd_authorized_keys_command_user }}
+AuthorizedPrincipalsCommand {{ sshd_authorized_principals_command }}
+AuthorizedPrincipalsCommandUser {{ sshd_authorized_principals_command_user }}
+PubkeyAuthOptions {{ sshd_pubkey_auth_options }}
+
+# Channel timeout
+ChannelTimeout {{ sshd_channel_timeout }}
+
+# Quality of Service
+IPQoS {{ sshd_ip_qos }}
+
+# Rekey settings
+RekeyLimit {{ sshd_rekey_limit }}

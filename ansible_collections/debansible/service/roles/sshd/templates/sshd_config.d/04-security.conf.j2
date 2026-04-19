@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+# Security settings
+
+StrictModes {{ sshd_strict_modes }}
+TCPKeepAlive {{ sshd_tcp_keepalive }}
+DebianBanner {{ sshd_debian_banner }}
+RequiredRSASize {{ sshd_required_rsa_size }}
+
+# Logging
+LogLevel {{ sshd_log_level }}
+SyslogFacility {{ sshd_syslog_facility }}
+PrintMotd {{ sshd_print_motd }}
+PrintLastLog {{ sshd_print_lastlog }}

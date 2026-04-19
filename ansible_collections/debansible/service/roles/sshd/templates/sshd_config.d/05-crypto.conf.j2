@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+# Cryptographic settings
+
+# Ciphers
+Ciphers {{ sshd_ciphers | join(',') }}
+
+# MACs
+MACs {{ sshd_macs | join(',') }}
+
+# Key Exchange Algorithms
+KexAlgorithms {{ sshd_kex_algorithms | join(',') }}
+
+# Signature algorithms
+CASignatureAlgorithms {{ sshd_ca_signature_algorithms | join(',') }}
+HostbasedAcceptedAlgorithms {{ sshd_hostbased_accepted_algorithms | join(',') }}
+HostkeyAlgorithms {{ sshd_hostkey_algorithms | join(',') }}
+PubkeyAcceptedAlgorithms {{ sshd_pubkey_accepted_algorithms | join(',') }}

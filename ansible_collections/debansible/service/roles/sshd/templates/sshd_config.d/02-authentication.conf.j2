@@ -1,0 +1,42 @@
+# {{ ansible_managed }}
+# Authentication settings
+
+# PAM
+UsePAM {{ sshd_use_pam }}
+PAMServiceName {{ sshd_pam_service_name }}
+
+# Root access
+PermitRootLogin {{ sshd_permit_root_login }}
+
+# Authentication methods
+PubkeyAuthentication {{ sshd_pubkey_authentication }}
+PasswordAuthentication {{ sshd_password_authentication }}
+KbdInteractiveAuthentication {{ sshd_kbd_interactive_authentication }}
+HostbasedAuthentication {{ sshd_hostbased_authentication }}
+# HostbasedUseNameFromPacketOnly {{ sshd_hostbased_use_name_from_packet_only }}  # COMMENTÉ - Directive invalide
+ChallengeResponseAuthentication {{ sshd_challenge_response_authentication | default('no') }}
+
+# Kerberos
+KerberosAuthentication {{ sshd_kerberos_authentication }}
+KerberosOrLocalPasswd {{ sshd_kerberos_or_local_passwd }}
+KerberosTicketCleanup {{ sshd_kerberos_ticket_cleanup }}
+# KerberosGetAFSToken {{ sshd_kerberos_get_afs_token | default('no') }}  # COMMENTÉ - Non supporté
+
+# GSSAPI
+GSSAPIAuthentication {{ sshd_gssapi_authentication }}
+GSSAPICleanupCredentials {{ sshd_gssapi_cleanup_credentials }}
+GSSAPIKeyExchange {{ sshd_gssapi_key_exchange }}
+GSSAPIStrictAcceptorCheck {{ sshd_gssapi_strict_acceptor_check }}
+GSSAPIStoreCredentialsOnRekey {{ sshd_gssapi_store_credentials_on_rekey }}
+GSSAPIKexAlgorithms {{ sshd_gssapi_kex_algorithms | join(',') }}
+
+# Other auth options
+IgnoreRhosts {{ sshd_ignore_rhosts }}
+IgnoreUserKnownHosts {{ sshd_ignore_user_known_hosts }}
+PermitEmptyPasswords {{ sshd_permit_empty_passwords }}
+AuthenticationMethods {{ sshd_authentication_methods }}
+
+# Environment
+{% for env in sshd_accept_env %}
+AcceptEnv {{ env }}
+{% endfor %}

@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+# Custom settings - Override anything above
+
+# Add any custom directives here that don't fit elsewhere
+{% if sshd_custom_directives is defined %}
+{% for key, value in sshd_custom_directives.items() %}
+{{ key }} {{ value }}
+{% endfor %}
+{% endif %}

@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+# Subsystems
+
+{% for subsystem in sshd_subsystems %}
+Subsystem {{ subsystem.name }} {{ subsystem.command }}
+{% endfor %}

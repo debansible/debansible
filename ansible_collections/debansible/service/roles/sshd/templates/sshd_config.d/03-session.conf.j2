@@ -1,0 +1,27 @@
+# {{ ansible_managed }}
+# Session settings
+
+LoginGraceTime {{ sshd_login_grace_time }}
+MaxAuthTries {{ sshd_max_auth_tries }}
+MaxSessions {{ sshd_max_sessions }}
+MaxStartups {{ sshd_max_startups }}
+ClientAliveInterval {{ sshd_client_alive_interval }}
+ClientAliveCountMax {{ sshd_client_alive_count_max }}
+
+# TTY and X11
+PermitTTY {{ sshd_permit_tty }}
+PermitUserRC {{ sshd_permit_user_rc }}
+PermitUserEnvironment {{ sshd_permit_user_environment }}
+X11Forwarding {{ sshd_x11_forwarding }}
+X11DisplayOffset {{ sshd_x11_display_offset }}
+X11UseLocalhost {{ sshd_x11_use_localhost }}
+
+# Stream local
+StreamLocalBindMask {{ sshd_stream_local_bind_mask }}
+StreamLocalBindUnlink {{ sshd_stream_local_bind_unlink }}
+
+# Compression
+Compression {{ sshd_compression }}
+
+# Unused connection
+UnusedConnectionTimeout {{ sshd_unused_connection_timeout }}

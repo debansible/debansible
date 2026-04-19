@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+# Network settings
+
+Port {{ sshd_port }}
+AddressFamily {{ sshd_address_family }}
+{% for listen in sshd_listen_address %}
+ListenAddress {{ listen }}
+{% endfor %}
+
+# Gateway and forwarding
+GatewayPorts {{ sshd_gateway_ports }}
+AllowTcpForwarding {{ sshd_allow_tcp_forwarding }}
+AllowAgentForwarding {{ sshd_allow_agent_forwarding }}
+DisableForwarding {{ sshd_disable_forwarding }}
+AllowStreamLocalForwarding {{ sshd_allow_stream_local_forwarding }}
+PermitTunnel {{ sshd_permit_tunnel }}
+PermitOpen {{ sshd_permit_open }}
+PermitListen {{ sshd_permit_listen }}
+
+# DNS
+UseDNS {{ sshd_use_dns }}

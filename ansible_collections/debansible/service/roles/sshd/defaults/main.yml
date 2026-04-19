@@ -1,0 +1,252 @@
+---
+# defaults/main.yaml for sshd configuration
+
+# Optional custom directives
+sshd_custom_directives: {}
+
+# Network settings
+sshd_port: 22
+sshd_address_family: any
+sshd_listen_address:
+  - "[::]:22"
+  - "0.0.0.0:22"
+
+# Authentication settings
+sshd_use_pam: "yes"
+sshd_pam_service_name: sshd
+sshd_permit_root_login: "without-password"
+sshd_ignore_rhosts: "yes"
+sshd_ignore_user_known_hosts: "no"
+sshd_hostbased_authentication: "no"
+sshd_hostbased_use_name_from_packet_only: "no"
+sshd_pubkey_authentication: "yes"
+sshd_password_authentication: "yes"
+sshd_kbd_interactive_authentication: "no"
+sshd_kerberos_authentication: "no"
+sshd_kerberos_or_local_passwd: "yes"
+sshd_kerberos_ticket_cleanup: "yes"
+sshd_gssapi_authentication: "no"
+sshd_gssapi_cleanup_credentials: "yes"
+sshd_gssapi_key_exchange: "no"
+sshd_gssapi_strict_acceptor_check: "yes"
+sshd_gssapi_store_credentials_on_rekey: "no"
+sshd_gssapi_kex_algorithms:
+  - gss-group14-sha256-
+  - gss-group16-sha512-
+  - gss-nistp256-sha256-
+  - gss-curve25519-sha256-
+  - gss-group14-sha1-
+  - gss-gex-sha1-
+sshd_permit_empty_passwords: "no"
+sshd_authentication_methods: any
+
+# Session settings
+sshd_login_grace_time: 120
+sshd_x11_display_offset: 10
+sshd_x11_forwarding: "yes"
+sshd_x11_use_localhost: "yes"
+sshd_permit_tty: "yes"
+sshd_permit_user_rc: "yes"
+sshd_permit_user_environment: "no"
+sshd_max_auth_tries: 6
+sshd_max_sessions: 10
+sshd_client_alive_interval: 0
+sshd_client_alive_count_max: 3
+sshd_required_rsa_size: 1024
+sshd_stream_local_bind_mask: "0177"
+sshd_stream_local_bind_unlink: "no"
+sshd_unused_connection_timeout: none
+
+# Forwarding settings
+sshd_allow_tcp_forwarding: "yes"
+sshd_allow_agent_forwarding: "yes"
+sshd_disable_forwarding: "no"
+sshd_allow_stream_local_forwarding: "yes"
+sshd_gateway_ports: "no"
+sshd_permit_tunnel: "no"
+sshd_permit_open: any
+sshd_permit_listen: any
+
+# Security settings
+sshd_strict_modes: "yes"
+sshd_tcp_keepalive: "yes"
+sshd_compression: "yes"
+sshd_use_dns: "no"
+sshd_debian_banner: "yes"
+
+# Logging settings
+sshd_log_level: INFO
+sshd_syslog_facility: AUTH
+sshd_print_motd: "no"
+sshd_print_lastlog: "yes"
+
+# File paths
+sshd_pid_file: /run/sshd.pid
+sshd_moduli_file: /etc/ssh/moduli
+sshd_xauth_location: /usr/bin/xauth
+sshd_authorized_keys_file:
+  - .ssh/authorized_keys
+  - .ssh/authorized_keys2
+sshd_host_key_agent: none
+sshd_sshd_session_path: /usr/lib/openssh/sshd-session
+sshd_sshd_auth_path: /usr/lib/openssh/sshd-auth
+
+# Host keys
+sshd_host_keys:
+  - /etc/ssh/ssh_host_rsa_key
+  - /etc/ssh/ssh_host_ecdsa_key
+  - /etc/ssh/ssh_host_ed25519_key
+
+# Crypto settings - Algorithm lists
+sshd_ciphers:
+  - chacha20-poly1305@openssh.com
+  - aes128-gcm@openssh.com
+  - aes256-gcm@openssh.com
+  - aes128-ctr
+  - aes192-ctr
+  - aes256-ctr
+
+sshd_macs:
+  - umac-64-etm@openssh.com
+  - umac-128-etm@openssh.com
+  - hmac-sha2-256-etm@openssh.com
+  - hmac-sha2-512-etm@openssh.com
+  - hmac-sha1-etm@openssh.com
+  - umac-64@openssh.com
+  - umac-128@openssh.com
+  - hmac-sha2-256
+  - hmac-sha2-512
+  - hmac-sha1
+
+sshd_kex_algorithms:
+  - mlkem768x25519-sha256
+  - sntrup761x25519-sha512
+  - sntrup761x25519-sha512@openssh.com
+  - curve25519-sha256
+  - curve25519-sha256@libssh.org
+  - ecdh-sha2-nistp256
+  - ecdh-sha2-nistp384
+  - ecdh-sha2-nistp521
+
+sshd_ca_signature_algorithms:
+  - ssh-ed25519
+  - ecdsa-sha2-nistp256
+  - ecdsa-sha2-nistp384
+  - ecdsa-sha2-nistp521
+  - sk-ssh-ed25519@openssh.com
+  - sk-ecdsa-sha2-nistp256@openssh.com
+  - rsa-sha2-512
+  - rsa-sha2-256
+
+sshd_hostbased_accepted_algorithms:
+  - ssh-ed25519-cert-v01@openssh.com
+  - ecdsa-sha2-nistp256-cert-v01@openssh.com
+  - ecdsa-sha2-nistp384-cert-v01@openssh.com
+  - ecdsa-sha2-nistp521-cert-v01@openssh.com
+  - sk-ssh-ed25519-cert-v01@openssh.com
+  - sk-ecdsa-sha2-nistp256-cert-v01@openssh.com
+  - rsa-sha2-512-cert-v01@openssh.com
+  - rsa-sha2-256-cert-v01@openssh.com
+  - ssh-ed25519
+  - ecdsa-sha2-nistp256
+  - ecdsa-sha2-nistp384
+  - ecdsa-sha2-nistp521
+  - sk-ssh-ed25519@openssh.com
+  - sk-ecdsa-sha2-nistp256@openssh.com
+  - rsa-sha2-512
+  - rsa-sha2-256
+
+sshd_hostkey_algorithms:
+  - ssh-ed25519-cert-v01@openssh.com
+  - ecdsa-sha2-nistp256-cert-v01@openssh.com
+  - ecdsa-sha2-nistp384-cert-v01@openssh.com
+  - ecdsa-sha2-nistp521-cert-v01@openssh.com
+  - sk-ssh-ed25519-cert-v01@openssh.com
+  - sk-ecdsa-sha2-nistp256-cert-v01@openssh.com
+  - rsa-sha2-512-cert-v01@openssh.com
+  - rsa-sha2-256-cert-v01@openssh.com
+  - ssh-ed25519
+  - ecdsa-sha2-nistp256
+  - ecdsa-sha2-nistp384
+  - ecdsa-sha2-nistp521
+  - sk-ssh-ed25519@openssh.com
+  - sk-ecdsa-sha2-nistp256@openssh.com
+  - rsa-sha2-512
+  - rsa-sha2-256
+
+sshd_pubkey_accepted_algorithms:
+  - ssh-ed25519-cert-v01@openssh.com
+  - ecdsa-sha2-nistp256-cert-v01@openssh.com
+  - ecdsa-sha2-nistp384-cert-v01@openssh.com
+  - ecdsa-sha2-nistp521-cert-v01@openssh.com
+  - sk-ssh-ed25519-cert-v01@openssh.com
+  - sk-ecdsa-sha2-nistp256-cert-v01@openssh.com
+  - rsa-sha2-512-cert-v01@openssh.com
+  - rsa-sha2-256-cert-v01@openssh.com
+  - ssh-ed25519
+  - ecdsa-sha2-nistp256
+  - ecdsa-sha2-nistp384
+  - ecdsa-sha2-nistp521
+  - sk-ssh-ed25519@openssh.com
+  - sk-ecdsa-sha2-nistp256@openssh.com
+  - rsa-sha2-512
+  - rsa-sha2-256
+
+# Miscellaneous
+sshd_fingerprint_hash: SHA256
+sshd_expose_auth_info: "no"
+sshd_refuse_connection: "no"
+sshd_banner: none
+sshd_force_command: none
+sshd_chroot_directory: none
+sshd_trusted_user_ca_keys: none
+sshd_revoked_keys: none
+sshd_security_key_provider: internal
+sshd_authorized_principals_file: none
+sshd_version_addendum: none
+sshd_authorized_keys_command: none
+sshd_authorized_keys_command_user: none
+sshd_authorized_principals_command: none
+sshd_authorized_principals_command_user: none
+sshd_pubkey_auth_options: none
+
+# Rate limiting
+sshd_max_startups: "10:30:100"
+sshd_per_source_max_startups: none
+sshd_per_source_netblock_size: "32:128"
+
+# Quality of Service
+sshd_ip_qos: "lowdelay throughput"
+
+# Rekey settings
+sshd_rekey_limit: "0 0"
+
+# Environment
+sshd_accept_env:
+  - LANG
+  - LC_*
+  - COLORTERM
+  - NO_COLOR
+
+# Subsystems
+sshd_subsystems:
+  - name: sftp
+    command: /usr/lib/openssh/sftp-server
+
+# Channel timeout
+sshd_channel_timeout: none
+
+# Penalties
+sshd_per_source_penalty_exempt_list: none
+sshd_per_source_penalties:
+  - "crash:90"
+  - "authfail:5"
+  - "noauth:1"
+  - "grace-exceeded:10"
+  - "refuseconnection:10"
+  - "max:600"
+  - "min:15"
+  - "max-sources4:65536"
+  - "max-sources6:65536"
+  - "overflow:permissive"
+  - "overflow6:permissive"

@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+# Rate limiting and penalties
+
+# Per source limits
+PerSourceMaxStartups {{ sshd_per_source_max_startups }}
+PerSourceNetBlockSize {{ sshd_per_source_netblock_size }}
+PerSourcePenaltyExemptList {{ sshd_per_source_penalty_exempt_list }}
+
+# Penalties
+PerSourcePenalties {{ sshd_per_source_penalties | join(' ') }}

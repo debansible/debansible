@@ -1,0 +1,92 @@
+---
+- name: Install OpenSSH server
+  ansible.builtin.apt:
+    name:
+      - openssh-server
+      - openssh-sftp-server  # Optionnel, pour SFTP
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  notify:
+    - restart_sshd
+  tags:
+    - sshd
+    - sshd_install
+
+- name: Ensure sshd_config.d directory exists
+  ansible.builtin.file:
+    path: "/etc/ssh/sshd_config.d"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  tags:
+    - sshd
+    - sshd_config
+
+- name: Get list of fragment templates
+  ansible.builtin.find:
+    paths: "{{ role_path }}/templates/sshd_config.d"
+    patterns: "*.conf.j2"
+  register: fragment_templates
+  delegate_to: localhost
+  run_once: true
+  become: false
+  tags:
+    - always
+
+- name: Set fragments list
+  ansible.builtin.set_fact:
+    sshd_config_fragments: "{{ fragment_templates.files | map(attribute='path') | map('basename') | map('regex_replace', '\\.j2$', '') | list }}"
+  run_once: true
+
+- name: Deploy sshd_config.d fragments
+  ansible.builtin.template:
+    src: "sshd_config.d/{{ item }}.j2"
+    dest: "/etc/ssh/sshd_config.d/{{ item }}"
+    owner: root
+    group: root
+    mode: '0644'
+    validate: /usr/sbin/sshd -t -f %s
+  loop: "{{ sshd_config_fragments | sort }}"
+  notify:
+    - Validate_sshd_config
+    - Restart_sshd
+  tags:
+    - sshd
+    - sshd_config
+
+- name: Ensure old configuration files are removed
+  ansible.builtin.find:
+    paths: "/etc/ssh/sshd_config.d"
+    patterns: "*.conf"
+    excludes: "{{ sshd_config_fragments }}"
+  register: old_configs
+  tags:
+    - sshd
+    - sshd_config
+    - sshd_cleanup
+
+- name: Remove obsolete configuration files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ old_configs.files }}"
+  when: old_configs.files | length > 0
+  notify:
+    - Validate_sshd_config
+    - Restart_sshd
+  tags:
+    - sshd
+    - sshd_config
+    - sshd_cleanup
+
+- name: Ensure SSH service is enabled and running
+  ansible.builtin.systemd:
+    name: "sshd"
+    enabled: true
+    state: started
+    daemon_reload: true
+  tags:
+    - sshd
+    - sshd_service
