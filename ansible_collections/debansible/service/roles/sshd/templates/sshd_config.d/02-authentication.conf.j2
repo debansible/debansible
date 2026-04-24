@@ -8,6 +8,9 @@ PAMServiceName {{ sshd_pam_service_name }}
 # Root access
 PermitRootLogin {{ sshd_permit_root_login }}
 
+# Authorized keys
+AuthorizedKeysFile {{ sshd_authorized_keys_file | join(' ') }}
+
 # Authentication methods
 PubkeyAuthentication {{ sshd_pubkey_authentication }}
 PasswordAuthentication {{ sshd_password_authentication }}

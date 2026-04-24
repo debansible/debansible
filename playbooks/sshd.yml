@@ -1,0 +1,8 @@
+---
+# external-playbook.yml
+- name: Deploy web server with SSH
+  hosts: test
+  become: true
+
+  roles:
+    - role: debansible.service.sshd

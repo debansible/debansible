@@ -1,0 +1,7 @@
+---
+# inventory/group_vars/baremetal/09-ssh.yml
+
+# Network settings : IPV4 only for baremetal
+sshd_address_family: inet
+sshd_listen_address:
+  - "0.0.0.0"

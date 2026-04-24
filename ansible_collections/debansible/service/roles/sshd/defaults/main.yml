@@ -86,7 +86,6 @@ sshd_moduli_file: /etc/ssh/moduli
 sshd_xauth_location: /usr/bin/xauth
 sshd_authorized_keys_file:
   - .ssh/authorized_keys
-  - .ssh/authorized_keys2
 sshd_host_key_agent: none
 sshd_sshd_session_path: /usr/lib/openssh/sshd-session
 sshd_sshd_auth_path: /usr/lib/openssh/sshd-auth
