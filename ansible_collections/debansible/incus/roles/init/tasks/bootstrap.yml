@@ -1,0 +1,6 @@
+---
+- name: "Apply Incus Preseed configuration"
+  ansible.builtin.command:
+    cmd: "incus admin init --preseed"
+    stdin: "{{ lookup('ansible.builtin.template', 'init.yaml.j2') }}"
+  changed_when: true

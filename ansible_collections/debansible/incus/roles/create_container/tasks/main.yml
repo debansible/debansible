@@ -1,0 +1,63 @@
+---
+# roles/debansible.incus.container/
+
+# =========================
+# tasks/main.yml
+# =========================
+
+- name: Ensure container is created and started
+  community.general.lxd_container:
+    url: "{{ create_container_url }}"
+    project: "{{ create_container_project }}"
+    name: "{{ create_container_name }}"
+    state: started
+
+    source:
+      type: image
+      remote: "{{ create_container_image_remote }}"
+      alias: "{{ create_container_image_alias }}"
+
+    profiles: "{{ create_container_profiles }}"
+
+    config:
+      limits.cpu: "{{ create_container_cpu }}"
+      limits.memory: "{{ create_container_memory }}"
+
+      user.user-data: |
+        #cloud-config
+        hostname: {{ create_container_name }}
+
+        users:
+          - name: root
+            ssh-authorized-keys:
+              - {{ create_container_ssh_public_key }}
+
+        package_update: true
+        package_upgrade: true
+
+    devices:
+      eth0:
+        type: nic
+        nictype: bridged
+        parent: "{{ create_container_bridge }}"
+        ipv4.address: "{{ incus_ip4 | default(omit) }}"
+
+# =========================
+# handlers/main.yml
+# =========================
+
+- name: Restart container
+  command: >
+    incus restart {{ create_container_container_name }}
+
+# =========================
+# example playbook
+# =========================
+
+# - hosts: localhost
+#  roles:
+#    - role: mazarini.incus.container
+#      vars:
+#        create_container_container_name: web01
+#        create_container_ip4: 192.168.1.10
+#        create_container_ssh_public_key: "ssh-rsa AAAA..."

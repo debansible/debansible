@@ -1,0 +1,30 @@
+# Standard Incus Preseed Configuration
+config: {}
+networks:
+- name: {{ init_bridge_name }}
+  type: bridge
+  config:
+    ipv4.address: {{ init_ipv4_network }}
+    ipv4.nat: "true"
+    ipv6.address: {{ init_ipv6_network }}
+    ipv6.nat: "true"
+    # Basic DHCP ranges defined at boot
+    ipv4.dhcp.ranges: {{ init_dhcp_range }}
+    ipv6.dhcp.ranges: {{ init_dhcp6_range }}
+storage_pools:
+- name: default
+  driver: btrfs
+  config:
+    # Path for the BTRFS storage pool
+    source: /var/lib/incus/storage-pools/default
+profiles:
+- name: default
+  devices:
+    root:
+      path: /
+      pool: default
+      type: disk
+    eth0:
+      name: eth0
+      network: {{ init_bridge_name }}
+      type: nic

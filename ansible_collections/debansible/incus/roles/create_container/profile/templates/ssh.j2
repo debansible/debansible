@@ -1,0 +1,29 @@
+config:
+  cloud-init.user-data: |
+    #cloud-config
+
+    package_update: true
+    package_upgrade: true
+
+    packages:
+      - openssh-server
+      - sudo
+
+    ssh_pwauth: false
+
+    users:
+      - name: root
+        ssh_authorized_keys:
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINa9VKXf9hXP4GEz2++dzThFfR0RNngtRDRVdtiXgtyV debansible@atto2
+      - name: mazarini
+        groups: [sudo]
+        shell: /bin/bash
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        lock_passwd: true
+        ssh_authorized_keys:
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINa9VKXf9hXP4GEz2++dzThFfR0RNngtRDRVdtiXgtyV debansible@atto2
+
+    runcmd:
+      - systemctl enable ssh
+      - systemctl restart ssh
+description: "SSH access profile with admin user and SSH keys"

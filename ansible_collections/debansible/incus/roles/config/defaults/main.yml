@@ -1,0 +1,37 @@
+---
+#
+# Default variables for the role config
+
+# Bridge configuration
+config_dns_bridge_name: "{{ bridge.name }}"
+config_dns_domain: "incus"
+
+config_dns_static_leases:
+  # Services critiques (X)
+  - { name: "mail", ip4: "10.0.0.10", ip6: "fd42::10:0:0:10", aliases: ["smtp"] }
+  - { name: "proxy", ip4: "10.0.0.20", ip6: "fd42::10:0:0:20", aliases: ["caddy"] }
+  - { name: "sql", ip4: "10.0.0.30", ip6: "fd42::10:0:0:30", aliases: ["db"] }
+  - { name: "mail-1", ip4: "10.0.1.10", ip6: "fd42::10:0:1:10", aliases: ["smtp-1"] }
+  - { name: "proxy-1", ip4: "10.0.1.20", ip6: "fd42::10:0:1:20", aliases: [] }
+  - { name: "sql-1", ip4: "10.0.1.30", ip6: "fd42::10:0:1:30", aliases: ["db-1"] }
+
+  # Série Web (X-n)
+  - { name: "web1", ip4: "10.0.0.81", ip6: "fd42::10:0:0:81", aliases: [] }
+  - { name: "web2", ip4: "10.0.0.82", ip6: "fd42::10:0:0:82", aliases: [] }
+  - { name: "web3", ip4: "10.0.0.83", ip6: "fd42::10:0:0:83", aliases: [] }
+  - { name: "web4", ip4: "10.0.0.84", ip6: "fd42::10:0:0:84", aliases: [] }
+  - { name: "web5", ip4: "10.0.0.85", ip6: "fd42::10:0:0:85", aliases: [] }
+  - { name: "web6", ip4: "10.0.0.86", ip6: "fd42::10:0:0:86", aliases: [] }
+  - { name: "web7", ip4: "10.0.0.87", ip6: "fd42::10:0:0:87", aliases: [] }
+  - { name: "web8", ip4: "10.0.0.88", ip6: "fd42::10:0:0:88", aliases: [] }
+  - { name: "web9", ip4: "10.0.0.89", ip6: "fd42::10:0:0:89", aliases: [] }
+
+  - { name: "web1-1", ip4: "10.0.1.81", ip6: "fd42::10:0:1:81", aliases: [] }
+  - { name: "web2-1", ip4: "10.0.1.82", ip6: "fd42::10:0:1:82", aliases: [] }
+  - { name: "web3-1", ip4: "10.0.1.83", ip6: "fd42::10:0:1:83", aliases: [] }
+  - { name: "web4-1", ip4: "10.0.1.84", ip6: "fd42::10:0:1:84", aliases: [] }
+  - { name: "web5-1", ip4: "10.0.1.85", ip6: "fd42::10:0:1:85", aliases: [] }
+  - { name: "web6-1", ip4: "10.0.1.86", ip6: "fd42::10:0:1:86", aliases: [] }
+  - { name: "web7-1", ip4: "10.0.1.87", ip6: "fd42::10:0:1:87", aliases: [] }
+  - { name: "web8-1", ip4: "10.0.1.88", ip6: "fd42::10:0:1:88", aliases: [] }
+  - { name: "web9-1", ip4: "10.0.1.89", ip6: "fd42::10:0:1:89", aliases: [] }

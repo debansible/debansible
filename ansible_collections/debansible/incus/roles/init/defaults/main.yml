@@ -1,0 +1,14 @@
+---
+#
+# Default variables for the init role
+
+# Bridge configuration
+init_bridge_name: "{{ bridge.name }}"
+init_bridge_ipv4: "{{ bridge.ipv4.address }}"
+init_ipv4_network: "{{ bridge.ipv4.address }}/{{ bridge.ipv4.cidr }}"
+init_ipv6_network: "{{ bridge.ipv6.address }}/{{ bridge.ipv6.cidr }}"
+init_ipv4_gateway: "{{ bridge.ipv4.address }}"
+
+# DHCP range
+init_dhcp_range: "{{ param_ipv4_dhcp }}.0.1-{{ param_ipv4_dhcp }}.255.254"
+init_dhcp6_range: "{{ param_ipv6_dhcp }}:0:1-{{ param_ipv6_dhcp }}:255:254"

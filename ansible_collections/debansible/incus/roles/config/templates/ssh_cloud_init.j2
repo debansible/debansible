@@ -1,0 +1,18 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+# Installation des briques de base pour Atto2 et Ansible
+packages:
+  - openssh-server
+
+# Configuration de l'accès root et de ta clé Zenbook
+users:
+  - name: root
+    ssh_authorized_keys:
+      - "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+      - "{{ lookup('file', '~/.ssh/id_ed25519_server.pub') }}"
+
+# On s'assure que SSH démarre au quart de tour
+runcmd:
+  - systemctl enable --now ssh

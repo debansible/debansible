@@ -1,0 +1,13 @@
+# --- DHCP Reservations ---
+{% for host in config_dns_static_leases %}
+dhcp-host={{ host.name }},{{ host.ip4 }},[{{ host.ip6 }}]
+{% endfor %}
+
+# --- DNS Aliases (CNAME) ---
+{% for host in config_dns_static_leases %}
+{% if host.aliases is defined %}
+{% for alias in host.aliases %}
+cname={{ alias }}.{{ config_dns_domain }},{{ host.name }}.{{ config_dns_domain }}
+{% endfor %}
+{% endif %}
+{% endfor %}

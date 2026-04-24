@@ -1,0 +1,41 @@
+---
+# roles/incus_init/tasks/main.yml
+
+- name: "Install Incus packages"
+  ansible.builtin.apt:
+    name:
+      - incus
+      - incus-client
+      - btrfs-progs
+    state: present
+    update_cache: true
+
+- name: "Ensure Incus service is started"
+  ansible.builtin.systemd:
+    name: incus
+    state: started
+    enabled: true
+
+- name: "Wait for Incus socket to be ready"
+  ansible.builtin.wait_for:
+    path: "/var/lib/incus/unix.socket"
+    state: present
+    timeout: 30
+
+- name: "Check if Incus is already initialized"
+  ansible.builtin.command:
+    cmd: "incus storage show default"
+  register: incus_init_status
+  failed_when: false
+  changed_when: false
+
+- name: "Trigger Bootstrap if Incus is not initialized"
+  ansible.builtin.include_tasks:
+    file: "bootstrap.yml"
+  when: incus_init_status.rc != 0
+
+- name: "Apply Incus Preseed configuration"
+  ansible.builtin.command:
+    cmd: "incus admin init --preseed"
+    stdin: "{{ lookup('ansible.builtin.template', 'init.yaml.j2') }}"
+  changed_when: true

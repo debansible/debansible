@@ -1,0 +1,26 @@
+---
+# roles/debansible.incus.container/
+
+# =========================
+# defaults/main.yml
+# =========================
+create_container_remote: atto2
+create_container_url: "https://atto2"
+create_container_project: default
+
+create_container_image_remote: images
+create_container_image_alias: debian/trixie/cloud
+
+create_container_container_name: "test-container"
+create_container_bridge: br0
+
+create_container_profiles: ["default"]
+
+create_container_cpu: 1
+create_container_memory: 512MB
+
+create_container_ip4: null
+create_container_gateway4: null
+create_container_nameserver: 1.1.1.1
+
+create_container_ssh_public_key: ""

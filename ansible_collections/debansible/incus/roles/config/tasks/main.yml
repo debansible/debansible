@@ -1,0 +1,22 @@
+- name: "Générer la configuration dnsmasq"
+  ansible.builtin.set_fact:
+    new_dnsmasq: "{{ lookup('template', 'dnsmasq_reservations.j2') }}"
+
+- name: "Récupérer la configuration actuelle"
+  ansible.builtin.command: "incus network get {{ config_dns_bridge_name }} raw.dnsmasq"
+  register: current_dnsmasq
+  failed_when: false
+  changed_when: false
+
+- name: "Appliquer la configuration DHCP/DNS si nécessaire"
+  ansible.builtin.command:
+    cmd: "incus network set incusbr0 raw.dnsmasq '{{ new_dnsmasq }}'"
+  when: new_dnsmasq != current_dnsmasq.stdout
+  changed_when: new_dnsmasq != current_dnsmasq.stdout
+
+- name: "Créer le profil ssh-server via template"
+  damex.incus.incus_profile:
+    name: "ssh-server"
+    state: present
+    config: "{{ lookup('template', 'ssh_cloud_init.j2') }}"
+    description: "Setup SSH"
