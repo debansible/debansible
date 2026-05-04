@@ -1,7 +1,7 @@
 ---
 # external-playbook.yml
 - name: Deploy web server with SSH
-  hosts: test
+  hosts: "{{ host | default('test') }}"
   become: true
 
   roles:
